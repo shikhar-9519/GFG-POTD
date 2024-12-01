@@ -1,0 +1,22 @@
+class Solution {
+  public:
+    // Function to find the first non-repeating character in a string.
+    char nonRepeatingChar(string &s) {
+        int h[26] = {0};
+
+        for (int i = 0; i < s.length(); i++) {
+            h[s[i] - 'a']++;
+        }
+        bool flag = false;
+
+        for (int i = 0; i < s.length(); i++) {
+            if (h[s[i] - 'a'] == 1) {
+                flag = true;
+                return s[i];
+            }
+        }
+        if (!flag) {
+            return '$';
+        }
+    }
+};
