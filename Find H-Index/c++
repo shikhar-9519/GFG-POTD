@@ -1,0 +1,20 @@
+class Solution {
+  public:
+    int hIndex(vector<int>& citations) {
+        int len = citations.size();
+        vector<int> bucket(len + 1, 0);
+
+        for (int citation : citations) {
+            bucket[min(citation, len)]++;
+        }
+
+        int count = 0;
+        for (int hIndex = len; hIndex >= 0; hIndex--) {
+            count += bucket[hIndex];
+            if (count >= hIndex) {
+                return hIndex;
+            }
+        }
+        return 0;
+    }
+};
