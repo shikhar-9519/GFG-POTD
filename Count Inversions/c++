@@ -1,0 +1,36 @@
+class Solution {
+  public:
+    // Function to count inversions in the array.
+    int inversionCount(vector<int>& arr) {
+        return mergeSort(arr, 0, arr.size() - 1);
+    }
+
+  private:
+    int mergeSort(vector<int>& arr, int le, int ri) {
+        if (le >= ri) {
+            return 0;
+        }
+        int mid = le + (ri - le) / 2;
+        int leftInversion = mergeSort(arr, le, mid);
+        int rightInversion = mergeSort(arr, mid + 1, ri);
+        int mergedInversion = merge(arr, le, mid, ri);
+        return leftInversion + rightInversion + mergedInversion;
+    }
+
+    int merge(vector<int>& arr, int le, int mid, int ri) {
+        int j = mid + 1;
+        int cn = 0;
+
+        // Count inversions
+        for (int i = le; i <= mid; i++) {
+            while (j <= ri && arr[i] > arr[j]) {
+                j++;
+            }
+            cn += (j - (mid + 1));
+        }
+
+        // Sort the array segment (le to ri) after counting inversions
+        sort(arr.begin() + le, arr.begin() + ri + 1);
+        return cn;
+    }
+};
