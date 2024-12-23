@@ -1,0 +1,23 @@
+class Solution {
+    // Function to search a given number in row-column sorted matrix.
+    public boolean searchMatrix(int[][] mat, int x) {
+        // code here
+        // code for java and c++ is almost same so I am not writing c++ code. Please ask if you have any doubt.
+        int n = mat.length;
+        int m = mat[0].length;
+        int beg = 0, end = n*m -1;
+        while(beg <= end){
+            int mid = (beg + end)/2;
+            int rNo = mid/m;
+            int cNo = mid%m;
+            if(mat[rNo][cNo] == x)
+                return true;
+            if(mat[rNo][cNo] < x) {
+                beg = mid +1;
+            }
+            else
+            end = mid-1;
+        }
+        return false;
+    }
+}
