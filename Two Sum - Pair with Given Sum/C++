@@ -1,0 +1,14 @@
+class Solution {
+  public:
+    bool twoSum(vector<int>& arr, int target) {
+        unordered_set<int> hst;
+        for (int i : arr) {
+            if (hst.find(target - i) != hst.end()) {
+                return true;
+            }
+            hst.insert(i);
+        }
+        return false;
+    }
+
+};
