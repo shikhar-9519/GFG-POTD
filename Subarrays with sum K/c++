@@ -1,0 +1,20 @@
+class Solution {
+  public:
+    int countSubarrays(vector<int> &arr, int k) {
+        // code here
+        int ans = 0, currSum = 0;
+        unordered_map<int, int> mp;
+        mp[0] = 1;
+
+        for (int i : arr) {
+            currSum += i;
+
+            if (mp.count(currSum - k)) {
+                ans += mp[currSum - k];
+            }
+            mp[currSum]++;
+        }
+
+        return ans;
+    }
+};
