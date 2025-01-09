@@ -1,0 +1,28 @@
+class Solution {
+  public:
+    vector<int> countDistinct(vector<int> &arr, int k) {
+        // code here.
+        vector<int> ans;
+        unordered_map<int, int> mp;
+        k--; // Adjust k for zero-based indexing
+        int n = arr.size();
+        for (int i = 0; i < n; i++) {
+            mp[arr[i]]++;
+            
+            if (i < k) {
+                continue;
+            }
+            
+            ans.push_back(mp.size());
+            
+            // Handle the element sliding out of the window
+            if (mp[arr[i - k]] == 1) {
+                mp.erase(arr[i - k]);
+            } else {
+                mp[arr[i - k]]--;
+            }
+        }
+        
+        return ans;
+    }
+};
