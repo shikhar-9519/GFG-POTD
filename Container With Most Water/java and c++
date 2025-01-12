@@ -1,0 +1,18 @@
+class Solution {
+// java and c++ code is almost same so I am not writing c++ code. Please ask if you have any doubt.
+    public int maxWater(int arr[]) {
+        // Code Here
+        int i=0, j=arr.length-1, ans=0;
+        while(i<j){
+            int currWater = Math.min(arr[i], arr[j])*(j-i);
+            ans=Math.max(ans, currWater);
+            if(arr[i]<arr[j]){
+                i++;
+            }
+            else {
+                j--;
+            }
+        }
+        return ans;
+    }
+}
