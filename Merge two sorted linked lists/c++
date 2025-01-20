@@ -1,0 +1,35 @@
+class Solution {
+public:
+    Node* sortedMerge(Node* head1, Node* head2) {
+        Node* newHead = nullptr;
+        Node* tmp = nullptr;
+
+        while (head1 != nullptr || head2 != nullptr) {
+            if (head1 != nullptr && (head2 == nullptr || head1->data < head2->data)) {
+                if (newHead == nullptr) {
+                    newHead = head1;
+                    tmp = head1;
+                } else {
+                    tmp->next = head1;
+                    tmp = head1;
+                }
+                head1 = head1->next;
+            } else {
+                if (newHead == nullptr) {
+                    newHead = head2;
+                    tmp = head2;
+                } else {
+                    tmp->next = head2;
+                    tmp = head2;
+                }
+                head2 = head2->next;
+            }
+        }
+
+        if (tmp != nullptr) {
+            tmp->next = nullptr;
+        }
+
+        return newHead;
+    }
+};
