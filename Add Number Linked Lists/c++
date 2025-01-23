@@ -1,4 +1,4 @@
-lass Solution {
+class Solution {
   public:
      Node* addTwoLists(Node* num1, Node* num2) {
         // Reverse both lists
