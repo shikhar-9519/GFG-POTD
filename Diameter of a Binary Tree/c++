@@ -9,8 +9,8 @@ class Solution {
         if(root==null){
            return 0;
         }
-        int left = calc(root.left);
-        int right = calc(root.right);
+        int left = calc(root->left);
+        int right = calc(root->right);
         ans=max(ans, left+right);
         return max(left, right)+1;
     }
