@@ -1,0 +1,48 @@
+class Solution {
+  public:
+     vector<int> boundaryTraversal(Node* node) {
+        vector<int> ans;
+        if (node->left != nullptr || node->right != nullptr) {
+            ans.push_back(node->data);
+        }
+        leftNodes(node->left, ans);
+        addLeaves(node, ans);
+        rightRevNodes(node->right, ans);
+        return ans;
+    }
+    
+private:
+    void leftNodes(Node* node, vector<int>& ans) {
+        if (node == nullptr)
+            return;
+        if (node->left != nullptr) {
+            ans.push_back(node->data);
+            leftNodes(node->left, ans);
+        } else if (node->right != nullptr) {
+            ans.push_back(node->data);
+            leftNodes(node->right, ans);
+        }
+    }
+    
+    void addLeaves(Node* node, vector<int>& ans) {
+        if (node == nullptr)
+            return;
+        addLeaves(node->left, ans);
+        if (node->left == nullptr && node->right == nullptr) {
+            ans.push_back(node->data);
+        }
+        addLeaves(node->right, ans);
+    }
+    
+    void rightRevNodes(Node* node, vector<int>& ans) {
+        if (node == nullptr)
+            return;
+        if (node->right != nullptr) {
+            rightRevNodes(node->right, ans);
+            ans.push_back(node->data);
+        } else if (node->left != nullptr) {
+            rightRevNodes(node->left, ans);
+            ans.push_back(node->data);
+        }
+    }
+};
