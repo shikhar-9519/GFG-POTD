@@ -1,0 +1,45 @@
+class Solution {
+  public:
+    Node *first, *middle, *last, *prev;
+
+    Solution() {
+        first = middle = last = prev = nullptr;
+    }
+
+    void inorder(Node* root) {
+        if (!root) return;
+
+        // Left subtree
+        inorder(root->left);
+
+        // Detect misplaced nodes
+        if (prev && prev->data > root->data) {
+            if (!first) {
+                first = prev;
+                middle = root;  // First violation
+            } else {
+                last = root;  // Second violation
+            }
+        }
+        prev = root;  // Update prev node
+
+        // Right subtree
+        inorder(root->right);
+    }
+
+    void correctBST(Node* root) {
+        first = middle = last = nullptr;
+        prev = new Node(INT_MIN);  // Initialize previous node with minimum value
+
+        inorder(root);
+
+        // If two nodes are not adjacent
+        if (first && last) {
+            swap(first->data, last->data);
+        }
+        // If two nodes are adjacent
+        else if (first && middle) {
+            swap(first->data, middle->data);
+        }
+    }
+};
