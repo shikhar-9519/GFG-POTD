@@ -1,0 +1,21 @@
+class Solution {
+    public:
+      vector<int> kLargest(vector<int>& arr, int k) {
+          // Your code here
+          priority_queue<int, vector<int>, greater<int>> minHeap; // Min-Heap
+  
+          for (int num : arr) {
+              minHeap.push(num);
+              if (minHeap.size() > k)
+                  minHeap.pop(); // Remove the smallest element
+          }
+  
+          vector<int> ans;
+          while (!minHeap.empty()) {
+              ans.insert(ans.begin(), minHeap.top()); // Insert at index 0
+              minHeap.pop();
+          }
+  
+          return ans;
+      }
+  };
