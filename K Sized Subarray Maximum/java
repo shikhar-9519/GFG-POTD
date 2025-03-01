@@ -1,0 +1,22 @@
+class Solution {
+    public ArrayList<Integer> maxOfSubarrays(int arr[], int k) {
+        // code here
+        int n=arr.length;
+        ArrayList<Integer> ans = new ArrayList();
+        Deque<Integer> deque = new LinkedList();
+        
+        for(int i=0;i<n;i++){
+            if(!deque.isEmpty() && deque.peekFirst() == i-k){
+                deque.pollFirst();
+            }
+            while(!deque.isEmpty() && arr[deque.peekLast()] <= arr[i]){
+                deque.pollLast();
+            }
+            deque.offerLast(i);
+            if(i>=k-1){
+                ans.add(arr[deque.peekFirst()]);
+            }
+        }
+        return ans;
+    }
+}
