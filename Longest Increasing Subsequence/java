@@ -1,0 +1,24 @@
+class Solution {
+    static int lis(int arr[]) {
+        // code here
+        int n = arr.length;
+        if (n == 0) return 0;
+        
+        int[] dp = new int[n]; // DP array to store LIS ending at each index
+        Arrays.fill(dp, 1); // Initialize all values to 1
+        
+        int maxLIS = 1; // Variable to store max LIS length
+        
+        // Compute LIS for each index
+        for (int i = 1; i < n; i++) {
+            for (int j = 0; j < i; j++) {
+                if (arr[j] < arr[i]) { // Check increasing condition
+                    dp[i] = Math.max(dp[i], dp[j] + 1);
+                }
+            }
+            maxLIS = Math.max(maxLIS, dp[i]); // Update max LIS length
+        }
+        
+        return maxLIS;
+    }
+}
