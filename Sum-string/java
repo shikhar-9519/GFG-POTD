@@ -1,0 +1,48 @@
+class Solution {
+     private String addStrings(String num1, String num2) {
+        // code here
+        StringBuilder ans=new StringBuilder();
+        int i=num1.length()-1,j=num2.length()-1;
+        int carry=0;
+        while(i>=0||j>=0||carry==1)
+        {
+            int v1=i>=0?num1.charAt(i)-'0':0;
+            int v2=j>=0?num2.charAt(j)-'0':0;
+            int sum=v1+v2+carry;
+            carry=sum/10;
+            ans.insert(0,sum%10);
+            i--;j--;
+        }
+        return ans.toString();
+    }
+    private boolean checkSeq(String s, int str, int len1, int len2){
+        String s1 = s.substring(str, str+len1);
+        String s2 = s.substring(str+len1, str+len1+len2);
+        String sum = addStrings(s1, s2);
+        int sumLen = sum.length();
+        
+        if(str+len1+len2+sumLen > s.length()){
+            return false;
+        }
+        if(sum.equals(s.substring(str+len1+len2, str+len1+len2+sumLen))){
+            if(str+len1+len2+sumLen == s.length()){
+                return true;
+            }
+            return checkSeq(s, str+len1, len2, sumLen);
+        }
+        return false;
+        
+    }
+    public boolean isSumString(String s) {
+        // code here
+        int n = s.length();
+        for(int len1 = 1; len1< n; len1++){
+            for(int len2 = 1; len1 + len2 < n ; len2++){
+                if(checkSeq(s, 0, len1, len2)){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+}
