@@ -1,0 +1,15 @@
+class Solution {
+    public boolean isDeadEnd(Node root) {
+        // Code here.
+        return chec(root, 0, Integer.MAX_VALUE);
+    }
+    static boolean chec(Node root, int min, int max){
+        if(root==null){
+            return false;
+        }
+        if(min+1 == root.data && max-1 == root.data){
+            return true;
+        }
+        return chec(root.left, min, root.data) || chec(root.right, root.data, max);
+    }
+}
