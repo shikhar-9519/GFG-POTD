@@ -1,0 +1,29 @@
+class Solution {
+  public:
+    int kokoEat(vector<int>& arr, int k) {
+        // Code here
+        int lo = 1, hi = 0, ans = 0;
+
+        for (int i : arr) {
+            hi = max(hi, i);
+        }
+
+        while (lo <= hi) {
+            int bananaPerHour = (lo + hi) / 2;
+            int totHr = 0;
+
+            for (int i : arr) {
+                totHr += (i + bananaPerHour - 1) / bananaPerHour; // Ceiling division
+            }
+
+            if (totHr > k) {
+                lo = bananaPerHour + 1;
+            } else {
+                ans = bananaPerHour;
+                hi = bananaPerHour - 1;
+            }
+        }
+
+        return ans;
+    }
+};
