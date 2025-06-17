@@ -1,0 +1,36 @@
+class Solution {
+  public:
+    vector<vector<string>> palinParts(string &s) {
+        vector<vector<string>> ans;
+        vector<string> tmp;
+        chec(s, 0, tmp, ans);
+        return ans;
+    }
+
+  private:
+    void chec(string &s, int ind, vector<string> &tmp, vector<vector<string>> &ans) {
+        if (ind >= s.length()) {
+            ans.push_back(tmp);
+            return;
+        }
+        for (int i = ind + 1; i <= s.length(); ++i) {
+            string curr = s.substr(ind, i - ind);
+            if (isPalin(curr)) {
+                tmp.push_back(curr);
+                chec(s, i, tmp, ans);
+                tmp.pop_back();
+            }
+        }
+    }
+
+    bool isPalin(const string &curr) {
+        int i = 0, j = curr.length() - 1;
+        while (i < j) {
+            if (curr[i] != curr[j])
+                return false;
+            i++;
+            j--;
+        }
+        return true;
+    }
+};
