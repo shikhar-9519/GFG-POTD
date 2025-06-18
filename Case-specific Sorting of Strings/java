@@ -1,0 +1,24 @@
+class Solution {
+    public static String caseSort(String s) {
+        // code here
+        ArrayList<Character> lower = new ArrayList();
+        ArrayList<Character> upper = new ArrayList();
+        for(char ch: s.toCharArray()){
+            if(Character.isLowerCase(ch))
+                lower.add(ch);
+            else
+                upper.add(ch);
+        }
+        Collections.sort(lower);
+        Collections.sort(upper);
+        StringBuilder ans = new StringBuilder();
+        int lIndex =0 , uIndex = 0;
+        for(char ch: s.toCharArray()){
+            if(Character.isLowerCase(ch))
+                ans.append(lower.get(lIndex++));
+            else
+                ans.append(upper.get(uIndex++));
+        }
+        return ans.toString();
+    }
+}

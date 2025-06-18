@@ -1,0 +1,30 @@
+class Solution {
+  public:
+    string caseSort(string& s) {
+        // code here
+        vector<char> lower, upper;
+
+        // Separate characters by case
+        for (char ch : s) {
+            if (islower(ch))
+                lower.push_back(ch);
+            else
+                upper.push_back(ch);
+        }
+
+        sort(lower.begin(), lower.end());
+        sort(upper.begin(), upper.end());
+
+        string ans = "";
+        int lIndex = 0, uIndex = 0;
+
+        for (char ch : s) {
+            if (islower(ch))
+                ans += lower[lIndex++];
+            else
+                ans += upper[uIndex++];
+        }
+
+        return ans;
+    }
+};
