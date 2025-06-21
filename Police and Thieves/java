@@ -1,0 +1,37 @@
+class Solution {
+    public int catchThieves(char[] arr, int k) {
+        // code here
+        int ans=0, n=arr.length;
+        for(int i=0;i<n;i++)
+        {
+            if(arr[i]=='P')
+            {boolean flag=true;
+            int max=Math.max(0,i-k);
+            for(int j=max;j<i;j++)
+            {
+                if(arr[j]=='T')
+                {
+                    arr[j]='C';
+                    ans++;
+                    flag=false;
+                    break;
+                }
+            }
+            if(flag)
+            {
+                int min=Math.min(i+k,n-1);
+                for(int j=i+1;j<=min;j++)
+            {
+                if(arr[j]=='T')
+                {
+                    arr[j]='C';
+                    ans++;
+                    flag=false;
+                    break;
+                }
+            }
+            }}
+        }
+        return ans;
+    }
+}
